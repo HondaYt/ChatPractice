@@ -106,6 +106,7 @@ send.addEventListener("click", () => {
     });
     copyBtn.addEventListener("click", () => {
         navigator.clipboard.writeText(post.textContent);
+        window.alert("copied!!!");
     });
 
     input.value = "";
