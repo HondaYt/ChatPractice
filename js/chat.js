@@ -97,6 +97,9 @@ send.addEventListener("click", () => {
 
     closeBtn.addEventListener("click", () => {
         postWrap.remove();
+        if (board.textContent == "") {
+            clear.classList.remove("active");
+        }
     });
     input.value = "";
 });
