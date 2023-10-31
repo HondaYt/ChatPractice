@@ -1,0 +1,90 @@
+#container {
+    display: flex;
+    flex-flow: column;
+    width: 100vw;
+    height: 100vh;
+    justify-content: flex-end;
+    align-items: center;
+    /* background: lemonchiffon; */
+}
+
+#submitBox {
+    height: 10%;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#input {
+    background: #eee;
+    /* display: block; */
+    width: 60vw;
+    height: 8vh;
+    border: 1px solid #333;
+    border-radius: 1vh;
+    padding: 16px;
+    font-size: 2rem;
+}
+
+#send {
+    background: greenyellow;
+    width: 20vw;
+    height: 8vh;
+    border: 1px solid #333;
+    border-radius: 1vh;
+}
+#clear {
+    background: tomato;
+    width: 20vw;
+    height: 8vh;
+    border: 1px solid #333;
+    border-radius: 1vh;
+}
+
+#board {
+    z-index: 0;
+    width: 100vw;
+    height: 90%;
+    position: relative;
+}
+.postWrap {
+    /* padding: 16px; */
+    position: absolute;
+    z-index: 1;
+    width: 256px;
+    height: 128px;
+}
+.post {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    overflow-wrap: break-word;
+    font-size: 2rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #3e3e3e;
+    border: 2px solid #005ae7;
+    border-top: 40px solid #005ae7;
+    overflow: hidden;
+    
+}
+
+.postWrap .closeBtn {
+    cursor: pointer;
+    content: "";
+    width: 32px;
+    height: 32px;
+    background: url(../img/close.svg) center no-repeat;
+    background-size: cover;
+    position: absolute;
+    right: 4px;
+    top: 4px;
+}
