@@ -18,7 +18,6 @@ input.addEventListener("keydown", (e) => {
 
 send.addEventListener("click", () => {
     if (input.value == "") return;
-
     let postWrap = document.createElement("div");
     postWrap.classList.add("postWrap");
     board.append(postWrap);
@@ -28,15 +27,26 @@ send.addEventListener("click", () => {
     let closeBtn = document.createElement("div");
     closeBtn.classList.add("closeBtn");
     postWrap.appendChild(closeBtn);
+
+    let date = document.createElement("p");
+    date.classList.add("date");
+    postWrap.appendChild(date);
+    date.textContent = new Date().toLocaleString();
+
     post.textContent = input.value;
     const rgbMin = 200;
+    clickCount += 1;
+    postWrap.style.zIndex = clickCount;
+
+    clear.classList.add("active");
+
     post.style.backgroundColor =
         "rgb(" +
-        ~~(rgbMin + (256 - rgbMin) * Math.random()) +
+        (rgbMin + (256 - rgbMin) * Math.random()) +
         ", " +
-        ~~(rgbMin + (256 - rgbMin) * Math.random()) +
+        (rgbMin + (256 - rgbMin) * Math.random()) +
         ", " +
-        ~~(rgbMin + (256 - rgbMin) * Math.random()) +
+        (rgbMin + (256 - rgbMin) * Math.random()) +
         ")";
 
     let postWrapHeight = parseInt(window.getComputedStyle(postWrap).height);
@@ -50,7 +60,7 @@ send.addEventListener("click", () => {
     let flg = false;
 
     postWrap.addEventListener("mousedown", () => (flg = true));
-    postWrap.addEventListener("mouseup", () => (flg = false));
+    window.addEventListener("mouseup", () => (flg = false));
 
     postWrap.addEventListener("click", () => {
         clickCount += 1;
@@ -65,7 +75,8 @@ send.addEventListener("click", () => {
 
     let offsetX, offsetY;
 
-    document.addEventListener("mousemove", (e) => {
+    // document.addEventListener("mousemove", (e) => {
+    window.addEventListener("mousemove", (e) => {
         if (!flg) return;
         postWrap.style.top = e.clientY - offsetY + "px";
         postWrap.style.left = e.clientX - offsetX + "px";
@@ -79,6 +90,7 @@ send.addEventListener("click", () => {
     });
 
     clear.addEventListener("click", () => {
+        clear.classList.remove("active");
         board.textContent = "";
         input.value = "";
     });
