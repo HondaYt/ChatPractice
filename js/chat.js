@@ -106,7 +106,7 @@ send.addEventListener("click", () => {
     });
     copyBtn.addEventListener("click", () => {
         navigator.clipboard.writeText(post.textContent);
-        if (navigator.clipboard.readText() == post.textContent)
+        if (navigator.clipboard.readText() !== post.textContent)
             document.execCommand("copy");
         setTimeout(() => {
             window.alert("Copied!");
