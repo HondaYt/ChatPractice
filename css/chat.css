@@ -35,6 +35,7 @@ html {
 }
 
 #send {
+    user-select: none;
     background: greenyellow;
     width: 20vw;
     height: 8vh;
@@ -43,6 +44,7 @@ html {
     font-size: 2rem;
 }
 #clear {
+    filter: drop-shadow(2px 2px 4px #000);
     background: url(../img/trashEmp.png) center no-repeat;
     background-size: cover;
     position: absolute;
@@ -54,6 +56,7 @@ html {
     font-size: 2rem;
 }
 #clear span {
+    user-select: none;
     font-size: 1.6rem;
     text-shadow: 0 0 4px #000;
     color: #fff;
@@ -76,6 +79,7 @@ html {
     position: relative;
 }
 .postWrap {
+    user-select: none;
     position: absolute;
     min-width: 256px;
     max-width: 98%;
@@ -83,11 +87,11 @@ html {
     border-radius: 8px;
     outline: 1px solid #eee;
     margin: 0;
+    border-radius: 10px;
 }
 
 .post {
-    cursor: pointer;
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 16px;
     width: 100%;
     height: 100%;
@@ -98,10 +102,9 @@ html {
     overflow-wrap: break-word;
     word-break: break-all;
     font-size: 2rem;
-    user-select: none;
     color: #000;
-    border: 2px solid #005ae7;
-    border-top: 40px solid #005ae7;
+    border: 4px solid #005ae7;
+    border-top: 41px solid #005ae7;
 }
 
 .closeBtn {
@@ -111,12 +114,24 @@ html {
     background: url(../img/close.svg) center no-repeat;
     background-size: cover;
     position: absolute;
-    right: 4px;
-    top: 4px;
+    right: 6px;
+    top: 6px;
     border-radius: 4px;
 }
 
-.closeBtn:active::after {
+.copyBtn {
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    background: url(../img/copy.svg) center no-repeat;
+    background-size: cover;
+    position: absolute;
+    right: 40px;
+    top: 6px;
+    border-radius: 4px;
+}
+.closeBtn:active::after,
+.copyBtn:active::after {
     width: 32px;
     height: 32px;
     position: absolute;

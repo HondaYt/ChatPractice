@@ -27,6 +27,9 @@ send.addEventListener("click", () => {
     let closeBtn = document.createElement("div");
     closeBtn.classList.add("closeBtn");
     postWrap.appendChild(closeBtn);
+    let copyBtn = document.createElement("div");
+    copyBtn.classList.add("copyBtn");
+    postWrap.appendChild(copyBtn);
 
     let date = document.createElement("p");
     date.classList.add("date");
@@ -101,5 +104,9 @@ send.addEventListener("click", () => {
             clear.classList.remove("active");
         }
     });
+    copyBtn.addEventListener("click", () => {
+        navigator.clipboard.writeText(post.textContent);
+    });
+
     input.value = "";
 });
