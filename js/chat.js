@@ -62,15 +62,15 @@ send.addEventListener("click", () => {
 
     let flg = false;
 
-    postWrap.addEventListener("mousedown", () => (flg = true));
-    window.addEventListener("mouseup", () => (flg = false));
+    postWrap.addEventListener("pointerdown", () => (flg = true));
+    window.addEventListener("pointerup", () => (flg = false));
 
     postWrap.addEventListener("click", () => {
         clickCount += 1;
         console.log(clickCount);
     });
 
-    // document.addEventListener("mousemove", (e) => {
+    // document.addEventListener("pointermove", (e) => {
     //     if (!flg) return;
     //     postWrap.style.top = e.clientY - postWrapHeight / 2 + "px";
     //     postWrap.style.left = e.clientX - postWrapWidth / 2 + "px";
@@ -78,14 +78,14 @@ send.addEventListener("click", () => {
 
     let offsetX, offsetY;
 
-    // document.addEventListener("mousemove", (e) => {
-    window.addEventListener("mousemove", (e) => {
+    // document.addEventListener("pointermove", (e) => {
+    window.addEventListener("pointermove", (e) => {
         if (!flg) return;
         postWrap.style.top = e.clientY - offsetY + "px";
         postWrap.style.left = e.clientX - offsetX + "px";
     });
 
-    postWrap.addEventListener("mousedown", (e) => {
+    postWrap.addEventListener("pointerdown", (e) => {
         flg = true;
         offsetX = e.clientX - parseInt(postWrap.style.left);
         offsetY = e.clientY - parseInt(postWrap.style.top);

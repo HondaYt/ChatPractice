@@ -8,10 +8,11 @@ html {
     display: flex;
     flex-flow: column;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     justify-content: flex-end;
     align-items: center;
     /* background: lemonchiffon; */
+    overflow: hidden;
 }
 
 #submitBox {
