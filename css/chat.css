@@ -5,15 +5,13 @@ html {
         "Hiragino Sans", Meiryo, sans-serif;
 }
 #container {
-    background: url(../img/xpWallPaper.webp) center no-repeat;
-    background-size: cover;
+    background: url(../img/xpWallPaper.webp) no-repeat center/cover;
     display: flex;
     flex-flow: column;
     width: 100vw;
     height: 100dvh;
     justify-content: flex-end;
     align-items: center;
-    /* background: lemonchiffon; */
     overflow: hidden;
 }
 
@@ -35,7 +33,7 @@ html {
     display: block;
     min-height: 100%;
     border: 1px solid #333;
-    border-radius: 1vh;
+    border-radius: 1dvh;
     font-size: 2rem;
 }
 #input {
@@ -68,12 +66,11 @@ html {
     position: absolute;
     right: 20%;
     cursor: pointer;
-    background-color: #fff;
+    background: #fff;
     width: 32px;
     height: 32px;
     transform: translate(-16px, 0);
-    background: url(../img/addPic.svg) center no-repeat;
-    background-size: cover;
+    background: url(../img/addPic.svg) no-repeat center/cover;
 }
 
 #send {
@@ -82,7 +79,7 @@ html {
     width: 20%;
     height: 100%;
     border: 1px solid #333;
-    border-radius: 1vh;
+    border-radius: 1dvh;
     font-size: 2rem;
 }
 #board {
@@ -93,8 +90,8 @@ html {
 }
 .clearLabel {
     position: absolute;
-    width: 10vh;
-    height: 10vh;
+    width: 10dvh;
+    height: 10dvh;
     left: 32px;
     top: 32px;
 }
@@ -102,10 +99,8 @@ html {
     width: 100%;
     height: 100%;
     filter: drop-shadow(2px 2px 4px #000);
-    background: url(../img/trashEmp.png) center no-repeat;
-    background-size: cover;
-    /* position: absolute; */
-    border-radius: 1vh;
+    background: url(../img/trashEmp.png) no-repeat center/cover;
+    border-radius: 1dvh;
     font-size: 2rem;
 }
 .clearLabel span {
@@ -122,8 +117,7 @@ html {
     display: block;
 }
 #clear.active {
-    background: url(../img/trash.png) center no-repeat;
-    background-size: cover;
+    background: url(../img/trash.png) no-repeat center/cover;
 }
 
 #fileInput {
@@ -159,14 +153,13 @@ html {
     border-top: 41px solid #005ae7;
 }
 .post img {
-    max-height: 50vh;
+    max-height: 50dvh;
 }
 .closeBtn {
     cursor: pointer;
     width: 32px;
     height: 32px;
-    background: url(../img/close.svg) center no-repeat;
-    background-size: cover;
+    background: url(../img/close.svg) no-repeat center/cover;
     position: absolute;
     right: 6px;
     top: 6px;
@@ -177,8 +170,7 @@ html {
     cursor: pointer;
     width: 32px;
     height: 32px;
-    background: url(../img/copy.svg) center no-repeat;
-    background-size: cover;
+    background: url(../img/copy.svg) no-repeat center/cover;
     position: absolute;
     right: 40px;
     top: 6px;
@@ -194,8 +186,7 @@ html {
     content: "";
     border-radius: 4px;
     cursor: pointer;
-    background: #00000030 center no-repeat;
-    background-size: cover;
+    background: #00000030 no-repeat center/cover;
 }
 
 .date {

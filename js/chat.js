@@ -62,12 +62,11 @@ send.addEventListener("click", () => {
         fileInput.value = "";
     }
 
-    const rgbMin = 200;
     clickCount += 1;
     postWrap.style.zIndex = clickCount;
-
     clear.classList.add("active");
 
+    const rgbMin = 200;
     post.style.backgroundColor =
         "rgb(" +
         (rgbMin + (256 - rgbMin) * Math.random()) +
