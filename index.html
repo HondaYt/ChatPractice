@@ -12,12 +12,23 @@
 <body>
     <div id="container">
         <div id="board"></div>
+        <label for="clear" class="clearLabel"><button id="clear"></button>
+            <span>ゴミ箱</span>
+        </label>
         <div id="submitBox">
-            <input type="text" id="input">
+            <div class="inputWrap">
+                <input type="text" id="input">
+                <div class="picContainer">
+                    <!-- <img src="img/31A77248-6883-4853-9AA3-8F3DACB110E8.JPG" alt=""> -->
+                </div>
+            </div>
+            <label for="fileInput" class="fileInputLabel">
+                <input type="file" id="fileInput" accept=".png,.jpeg">
+            </label>
             <button id="send">Send</button>
         </div>
-        <button id="clear"><span>ごみ箱</span></button>
     </div>
+
     <script src="js/chat.js"></script>
 </body>
 

@@ -1,23 +1,40 @@
+const inputWrap = document.querySelector("#inputWrap");
+const picContainer = document.querySelector(".picContainer");
 const input = document.querySelector("#input");
 const send = document.querySelector("#send");
 const clear = document.querySelector("#clear");
 const board = document.querySelector("#board");
 const submitBox = document.querySelector("#submitBox");
+const fileInput = document.querySelector("#fileInput");
 let boardHeight = parseInt(window.getComputedStyle(board).height);
 let boardWidth = parseInt(window.getComputedStyle(board).width);
 
 console.log(boardHeight);
 
-let clickCount = 10;
+let clickCount = 20;
 
-input.addEventListener("keydown", (e) => {
+window.addEventListener("keydown", (e) => {
     if (e.key !== "Enter" || e.isComposing) return;
     send.click();
     input.value = "";
 });
 
+fileInput.addEventListener("change", (e) => {
+    picContainer.classList.add("active");
+    let file = e.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+        let img = document.createElement("img");
+        img.src = reader.result;
+        picContainer.appendChild(img);
+    };
+});
+
 send.addEventListener("click", () => {
-    if (input.value == "") return;
+    picContainer.classList.remove("active");
+
+    if (input.value == "" && picContainer.children.length == 0) return;
     let postWrap = document.createElement("div");
     postWrap.classList.add("postWrap");
     board.append(postWrap);
@@ -36,7 +53,15 @@ send.addEventListener("click", () => {
     postWrap.appendChild(date);
     date.textContent = new Date().toLocaleString();
 
-    post.textContent = input.value;
+    if (input.value != "") {
+        post.textContent = input.value;
+    } else if (picContainer.children.length > 0) {
+        let img = picContainer.children[0];
+        post.appendChild(img);
+        picContainer.textContent = "";
+        fileInput.value = "";
+    }
+
     const rgbMin = 200;
     clickCount += 1;
     postWrap.style.zIndex = clickCount;
@@ -105,12 +130,16 @@ send.addEventListener("click", () => {
         }
     });
     copyBtn.addEventListener("click", () => {
-        navigator.clipboard.writeText(post.textContent);
-        if (navigator.clipboard.readText() !== post.textContent)
-            document.execCommand("copy");
-        setTimeout(() => {
-            window.alert("Copied!");
-        }, 0);
+        if (post.children.length > 0) {
+            window.alert("画像はコピーできません(><)");
+        } else {
+            navigator.clipboard.writeText(post.textContent);
+            if (navigator.clipboard.readText() !== post.textContent)
+                document.execCommand("copy");
+            setTimeout(() => {
+                window.alert("Copied!");
+            }, 0);
+        }
     });
 
     input.value = "";
