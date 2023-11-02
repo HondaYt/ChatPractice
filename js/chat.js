@@ -9,9 +9,9 @@ const fileInput = document.querySelector("#fileInput");
 let boardHeight = parseInt(window.getComputedStyle(board).height);
 let boardWidth = parseInt(window.getComputedStyle(board).width);
 
-console.log(boardHeight);
+// console.log(boardHeight);
 
-let clickCount = 20;
+let clickCount = 0;
 
 window.addEventListener("keydown", (e) => {
     if (e.key !== "Enter" || e.isComposing) return;
@@ -89,10 +89,10 @@ send.addEventListener("click", () => {
     postWrap.addEventListener("pointerdown", () => (flg = true));
     window.addEventListener("pointerup", () => (flg = false));
 
-    postWrap.addEventListener("click", () => {
-        clickCount += 1;
-        console.log(clickCount);
-    });
+    // postWrap.addEventListener("click", () => {
+    //     clickCount += 1;
+    //     console.log(clickCount);
+    // });
 
     // document.addEventListener("pointermove", (e) => {
     //     if (!flg) return;
@@ -113,6 +113,8 @@ send.addEventListener("click", () => {
         flg = true;
         offsetX = e.clientX - parseInt(postWrap.style.left);
         offsetY = e.clientY - parseInt(postWrap.style.top);
+        clickCount += 1;
+        console.log(clickCount);
         postWrap.style.zIndex = clickCount;
     });
 
@@ -120,6 +122,7 @@ send.addEventListener("click", () => {
         clear.classList.remove("active");
         board.textContent = "";
         input.value = "";
+        clickCount = 0;
     });
 
     closeBtn.addEventListener("click", () => {
@@ -142,4 +145,5 @@ send.addEventListener("click", () => {
     });
 
     input.value = "";
+    console.log(clickCount);
 });
