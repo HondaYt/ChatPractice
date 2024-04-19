@@ -6,144 +6,145 @@ const clear = document.querySelector("#clear");
 const board = document.querySelector("#board");
 const submitBox = document.querySelector("#submitBox");
 const fileInput = document.querySelector("#fileInput");
-let boardHeight = parseInt(window.getComputedStyle(board).height);
-let boardWidth = parseInt(window.getComputedStyle(board).width);
-
-// console.log(boardHeight);
+const boardHeight = Number.parseInt(window.getComputedStyle(board).height);
+const boardWidth = Number.parseInt(window.getComputedStyle(board).width);
 
 let clickCount = 0;
 
 window.addEventListener("keydown", (e) => {
-    if (e.key !== "Enter" || e.isComposing) return;
-    send.click();
-    input.value = "";
+	if (e.key !== "Enter" || e.isComposing) return;
+	send.click();
+	input.value = "";
+});
+
+window.addEventListener("keydown", (e) => {
+	if (e.key !== "Backspace" || !picContainer.children.length > 0) return;
+	picContainer.textContent = "";
+	fileInput.value = "";
 });
 
 fileInput.addEventListener("change", (e) => {
-    picContainer.classList.add("active");
-    let file = e.target.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-        let img = document.createElement("img");
-        img.src = reader.result;
-        picContainer.appendChild(img);
-    };
+	picContainer.classList.add("active");
+	const file = e.target.files[0];
+	const reader = new FileReader();
+	reader.readAsDataURL(file);
+	reader.onload = () => {
+		const img = document.createElement("img");
+		img.src = reader.result;
+		picContainer.appendChild(img);
+	};
 });
 
 send.addEventListener("click", () => {
-    picContainer.classList.remove("active");
+	picContainer.classList.remove("active");
 
-    if (input.value == "" && picContainer.children.length == 0) return;
-    let postWrap = document.createElement("div");
-    postWrap.classList.add("postWrap");
-    board.append(postWrap);
-    let post = document.createElement("div");
-    post.classList.add("post");
-    postWrap.appendChild(post);
-    let closeBtn = document.createElement("div");
-    closeBtn.classList.add("closeBtn");
-    postWrap.appendChild(closeBtn);
-    let copyBtn = document.createElement("div");
-    copyBtn.classList.add("copyBtn");
-    postWrap.appendChild(copyBtn);
+	if (input.value === "" && picContainer.children.length === 0) return;
+	const postWrap = document.createElement("div");
+	postWrap.classList.add("postWrap");
+	board.append(postWrap);
+	const post = document.createElement("div");
+	post.classList.add("post");
+	postWrap.appendChild(post);
+	const closeBtn = document.createElement("div");
+	closeBtn.classList.add("closeBtn");
+	postWrap.appendChild(closeBtn);
+	const copyBtn = document.createElement("div");
+	copyBtn.classList.add("copyBtn");
+	postWrap.appendChild(copyBtn);
 
-    let date = document.createElement("p");
-    date.classList.add("date");
-    postWrap.appendChild(date);
-    date.textContent = new Date().toLocaleString();
+	const date = document.createElement("p");
+	date.classList.add("date");
+	postWrap.appendChild(date);
+	date.textContent = new Date().toLocaleString();
 
-    if (input.value != "") {
-        post.textContent = input.value;
-    } else if (picContainer.children.length > 0) {
-        let img = picContainer.children[0];
-        post.appendChild(img);
-        picContainer.textContent = "";
-        fileInput.value = "";
-    }
+	if (input.value !== "") {
+		post.textContent = input.value;
+	} else if (picContainer.children.length > 0) {
+		const img = picContainer.children[0];
+		post.appendChild(img);
+		picContainer.textContent = "";
+		fileInput.value = "";
+	}
 
-    clickCount += 1;
-    postWrap.style.zIndex = clickCount;
-    clear.classList.add("active");
+	clickCount += 1;
+	postWrap.style.zIndex = clickCount;
+	clear.classList.add("active");
 
-    const rgbMin = 200;
-    post.style.backgroundColor =
-        "rgb(" +
-        (rgbMin + (256 - rgbMin) * Math.random()) +
-        ", " +
-        (rgbMin + (256 - rgbMin) * Math.random()) +
-        ", " +
-        (rgbMin + (256 - rgbMin) * Math.random()) +
-        ")";
+	const rgbMin = 200;
+	post.style.backgroundColor = `rgb(${
+		rgbMin + (256 - rgbMin) * Math.random()
+	},${rgbMin + (256 - rgbMin) * Math.random()},${
+		rgbMin + (256 - rgbMin) * Math.random()
+	})`;
 
-    let postWrapHeight = parseInt(window.getComputedStyle(postWrap).height);
-    let postWrapWidth = parseInt(window.getComputedStyle(postWrap).width);
+	const postWrapHeight = Number.parseInt(
+		window.getComputedStyle(postWrap).height,
+	);
+	const postWrapWidth = Number.parseInt(
+		window.getComputedStyle(postWrap).width,
+	);
 
-    postWrap.style.top =
-        Math.random() * (boardHeight - postWrapHeight + 1) + "px";
-    postWrap.style.left =
-        Math.random() * (boardWidth - postWrapWidth + 1) + "px";
+	postWrap.style.top = `${
+		Math.random() * (boardHeight - postWrapHeight + 1)
+	}px`;
+	postWrap.style.left = `${Math.random() * (boardWidth - postWrapWidth + 1)}px`;
 
-    let flg = false;
+	let flg = false;
 
-    postWrap.addEventListener("pointerdown", () => (flg = true));
-    window.addEventListener("pointerup", () => (flg = false));
+	postWrap.addEventListener("pointerdown", () => {
+		flg = true;
+	});
+	window.addEventListener("pointerup", () => {
+		flg = false;
+	});
 
-    // postWrap.addEventListener("click", () => {
-    //     clickCount += 1;
-    //     console.log(clickCount);
-    // });
+	let offsetX;
+	let offsetY;
 
-    // document.addEventListener("pointermove", (e) => {
-    //     if (!flg) return;
-    //     postWrap.style.top = e.clientY - postWrapHeight / 2 + "px";
-    //     postWrap.style.left = e.clientX - postWrapWidth / 2 + "px";
-    // });
+	// document.addEventListener("pointermove", (e) => {
+	window.addEventListener("pointermove", (e) => {
+		if (!flg) return;
+		postWrap.style.top = `${e.clientY - offsetY}px`;
+		postWrap.style.left = `${e.clientX - offsetX}px`;
+	});
 
-    let offsetX, offsetY;
+	postWrap.addEventListener("pointerdown", (e) => {
+		flg = true;
+		offsetX = e.clientX - Number.parseInt(postWrap.style.left);
+		console.log(`clientX is ${e.clientX}`);
+		console.log(`postPosition is ${postWrap.style.left}`);
+		offsetY = e.clientY - Number.parseInt(postWrap.style.top);
+		clickCount += 1;
+		console.log(clickCount);
+		postWrap.style.zIndex = clickCount;
+	});
 
-    // document.addEventListener("pointermove", (e) => {
-    window.addEventListener("pointermove", (e) => {
-        if (!flg) return;
-        postWrap.style.top = e.clientY - offsetY + "px";
-        postWrap.style.left = e.clientX - offsetX + "px";
-    });
+	clear.addEventListener("click", () => {
+		clear.classList.remove("active");
+		board.textContent = "";
+		input.value = "";
+		clickCount = 0;
+	});
 
-    postWrap.addEventListener("pointerdown", (e) => {
-        flg = true;
-        offsetX = e.clientX - parseInt(postWrap.style.left);
-        offsetY = e.clientY - parseInt(postWrap.style.top);
-        clickCount += 1;
-        console.log(clickCount);
-        postWrap.style.zIndex = clickCount;
-    });
+	closeBtn.addEventListener("click", () => {
+		postWrap.remove();
+		if (board.textContent === "") {
+			clear.classList.remove("active");
+		}
+	});
+	copyBtn.addEventListener("click", () => {
+		if (post.children.length > 0) {
+			window.alert("画像はコピーできません(><)");
+		} else {
+			navigator.clipboard.writeText(post.textContent);
+			if (navigator.clipboard.readText() !== post.textContent)
+				document.execCommand("copy");
+			setTimeout(() => {
+				window.alert("Copied!");
+			}, 0);
+		}
+	});
 
-    clear.addEventListener("click", () => {
-        clear.classList.remove("active");
-        board.textContent = "";
-        input.value = "";
-        clickCount = 0;
-    });
-
-    closeBtn.addEventListener("click", () => {
-        postWrap.remove();
-        if (board.textContent == "") {
-            clear.classList.remove("active");
-        }
-    });
-    copyBtn.addEventListener("click", () => {
-        if (post.children.length > 0) {
-            window.alert("画像はコピーできません(><)");
-        } else {
-            navigator.clipboard.writeText(post.textContent);
-            if (navigator.clipboard.readText() !== post.textContent)
-                document.execCommand("copy");
-            setTimeout(() => {
-                window.alert("Copied!");
-            }, 0);
-        }
-    });
-
-    input.value = "";
-    console.log(clickCount);
+	input.value = "";
+	console.log(clickCount);
 });
